@@ -156,7 +156,7 @@ var cirarr = []
 function Init()
 {
   cirarr = []
-  var radius = 1;
+  var radius = 3;
   var startx = ( canvas.width - (radius * Iw *2))/2;
   var starty = ( canvas.height - (radius * Ih *2))/2;
   for(var i=0;i<pixels.length;i++)
@@ -186,4 +186,4 @@ function animate(){
 Init();
 animate();
 setTimeout(function(){ distort=true; }, 1000);
-setTimeout(function(){ distort=false; }, 4000);
+setTimeout(function(){ distort=false; }, 40000);

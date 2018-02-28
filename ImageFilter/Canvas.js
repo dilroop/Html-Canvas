@@ -92,8 +92,8 @@ function color(r,g,b,f)
 
 function timer(){
 setTimeout(function(){
-    loopx(random(1,8));
+    loopx(random(1,3));
     timer();
-},10);
+},100);
 }
 timer();
