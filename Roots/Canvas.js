@@ -110,17 +110,6 @@ function remove(array, element) {
 
 Snake.prototype.draw = function() {
 
-    if(this.special)
-    {
-      c.beginPath();
-      c.fillStyle="#fff";
-      c.arc(this._x,this._y,this.sw+3,0,2*Math.PI);
-      c.fill();
-      c.strokeStyle=this.color;
-      c.beginPath();
-      c.arc(this.x,this.y,this.sw+3,0,2*Math.PI);
-      c.stroke();
-    }
     c.beginPath();
     c.lineCap="round";
     c.lineWidth = this.sw;
@@ -153,10 +142,6 @@ function AddRandomSnake()
   var y = random(0,canvas.height);
   var color = randomColor();
   let s = new Snake(x,y,color);
-  if(random(0,100)>95)
-  {
-    s.special=true;
-  }
   objects.push(s);
 
 }
@@ -164,9 +149,6 @@ function AddRandomSnake()
 // Animation Loop
 function animate() {
     requestAnimationFrame(animate)
-    //c.fillStyle="#ffffff28";
-    //c.fillRect(0, 0, canvas.width, canvas.height);
-    //c.clearRect(0, 0, canvas.width, canvas.height);
 
     objects.forEach(object => {
      object.update();
