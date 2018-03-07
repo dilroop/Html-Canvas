@@ -22,7 +22,7 @@ var minRadius = 4;
 var maxRadius = 12;
 var zooma= 60;
 var zoomb= 40;
-var senseMouse=60;
+var senseMouse=180;
 var rectarr = [];
 var rectgroup = [];
 // Events
@@ -49,7 +49,7 @@ function Rect(x,y,sx,sy,sidea,sideb,c)
   this.sx = sx;
   this.sy = sy;
   this.sidea=sidea;
-  this.color =  colors[random(0,5)];
+  this.color =  colors[random(0,colors.length-1)];
   this.sideb=sideb;
   this.a = sidea;
   this.b = sideb;
@@ -58,11 +58,23 @@ function Rect(x,y,sx,sy,sidea,sideb,c)
   {
     this.Update();
     c.beginPath();
+    c.lineWidth=1;
+    c.lineCap="round";
     c.rect(this.x,this.y,this.sidea,this.sideb,false);
     c.fill();
-    c.stroke();
+
+    if(this.distance()<senseMouse)
+    {
+      c.beginPath();
+      c.moveTo(mouseX,mouseY);
+      c.lineWidth=2;
+      c.strokeStyle=this.color;
+      c.lineTo(this.x+(this.sidea/2),this.y+(this.sideb/2));
+      c.stroke();
+    }
   }
-  this.Update = function (){
+  this.Update = function ()
+  {
     if(this.x + this.sidea > canvas.width || this.x - this.sidea < 0)
     {
       this.sx = -this.sx;
@@ -86,6 +98,7 @@ function Rect(x,y,sx,sy,sidea,sideb,c)
       }
       c.fillStyle =this.color;
       c.strokeStyle = "#ff0000";
+
     }else{
       this.sidea -=1;
       this.sideb -=1;
@@ -98,21 +111,6 @@ function Rect(x,y,sx,sy,sidea,sideb,c)
       {
         this.sideb=this.b;
         c.fillStyle = back;
-      }
-    }
-
-    if(this.distance()<(senseMouse+20))
-    {
-      if(this.index==0)
-      {
-        rectgroup.push(this);
-        this.index=1;
-      }
-    }else {
-      if(this.index==1)
-      {
-        rectgroup.pop(this);
-        this.index=0;
       }
     }
 
@@ -155,26 +153,6 @@ function animate(){
   {
       var cir = rectarr[i];
       cir.draw();
-  }
-  if(rectgroup.length!=0)
-  {
-    c.strokeStyle="#FF0000";
-    c.beginPath();
-    c.moveTo(mouseX,mouseY);
-    c.lineTo(rectgroup[0].x,rectgroup[0].y);
-    for(var k=1;k<rectgroup.length;k++)
-    {
-      if(Distance(rectgroup[k].x,rectgroup[k].y)>(senseMouse+20))
-      {
-        rectgroup.pop(k);
-        continue;
-      }
-
-      c.moveTo(mouseX,mouseY);
-       c.lineTo(rectgroup[k].x,rectgroup[k].y);
-
-    }
-    c.stroke();
   }
 }
 

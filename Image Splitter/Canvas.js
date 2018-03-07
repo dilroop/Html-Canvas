@@ -127,7 +127,7 @@ function Circle(x,y,sx,sy,radius,color,c)
         var dx = this._x-this.x;//this._x>this.x?this._x-this.x:this.x-this._x;
         var dy = this._y-this.y;//this._y>this.y?this._y-this.y:this.y-this._y;
         var angle = Math.atan2(dy,dx);
-        var magnitude =1;
+        var magnitude =2;
         this.sx = Math.cos(angle) * magnitude;
         this.sy = Math.sin(angle) * magnitude;
         this.x+=this.sx;
@@ -137,6 +137,7 @@ function Circle(x,y,sx,sy,radius,color,c)
         this.x = this._x;
         this.y = this._y;
       }
+
     }else {
       this.x+=this.sx;
       this.y+=this.sy;
@@ -186,4 +187,4 @@ function animate(){
 Init();
 animate();
 setTimeout(function(){ distort=true; }, 1000);
-setTimeout(function(){ distort=false; }, 40000);
+setTimeout(function(){ distort=false; }, 4000);

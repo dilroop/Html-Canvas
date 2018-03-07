@@ -9,7 +9,7 @@ c.fillRect(0,0,canvas.width,canvas.height);
 var mouseX;
 var mouseY;
 var back= "#D9E8F5";
-var maxSize=30;
+var maxSize=16;
 var colors = [
   "#FFBC67",
   "#DA727E",
@@ -21,7 +21,7 @@ var colors = [
   "#478594",
 ]
 var textarr = [];
-var senseMouse = 220;
+var senseMouse = 140;
 // Events
 window.addEventListener('mousemove', function (event){
   mouseX = event.x;
@@ -136,8 +136,13 @@ function Init()
     var size = random(4,20);
     var x = random(size,canvas.width-size);
     var y = random(size,canvas.height-size);
-    var sx = random(-1,2);
-    var sy = random(-1,2);
+    var sx = random(-1,1)*random(0,2)*Math.random();
+    var sy = random(-1,1)*random(0,2)*Math.random();
+    if(sy==0 && sx==0)
+    {
+      i--;
+      continue;
+    }
     var tmp = new Text(text,size,x,y,sx,sy,c);
     textarr.push(tmp);
   }
